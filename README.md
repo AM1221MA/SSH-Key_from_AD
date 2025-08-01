@@ -25,9 +25,10 @@ $chmod 600 /etc/ssh/ldap_bind_pw
 
 SIXTH
 Add the next lines to the SSHD configuration:
-|--------------------------------------------------
+
+|
 |AuthorizedKeysCommand /path/to/ad_validation.sh
 |AuthorizedKeysCommandUser root
 |PasswordAuthentication no
 |PubkeyAuthentication yes
-|--------------------------------------------------
+|
