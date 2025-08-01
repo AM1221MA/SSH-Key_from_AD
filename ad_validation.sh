@@ -1,14 +1,14 @@
 #!/bin/bash
-USERNAME=$1
-SAMACCOUNTNAME=$(echo "$USERNAME" | cut -d@ -f1)
-USER_HOME=$(getent passwd "$USERNAME" | cut -d: -f6)
+USER=$1
+SAMACCOUNTNAME=$(echo "$USER" | cut -d@ -f1)
+USER_HOME=$(getent passwd "$USER" | cut -d: -f6)
 SSH_DIR="$USER_HOME/.ssh"
 AUTH_KEYS="$SSH_DIR/authorized_keys"
 LOGS="/tmp/ssh_key_debug.log"
-echo "$USERNAME"
+echo "$USER"
 echo "$SAMMACOUNTNAME"
 echo "$SSH_DIR"
-echo "[$(date)] USERNAME=$USERNAME" >> "$LOGS"
+echo "[$(date)] USERNAME=$USER" >> "$LOGS"
 echo "SAMACCOUNTNAME=$SAMACCOUNTNAME" >> "$LOGS"
 echo "USER_HOME=$USER_HOME" >> "$LOGS"
 # Si ya tiene la llave guardada localmente, usar esa
@@ -30,13 +30,13 @@ echo "$KEY" >> "$LOGS"
 # Crear .ssh y guardar la llave
 if [[ ! -d "$SSH_DIR" ]]; then
     mkdir -p "$SSH_DIR"
-    chown "$USERNAME": "$SSH_DIR"
+    chown "$USER": "$SSH_DIR"
     chmod 700 "$SSH_DIR"
 fi
 echo "$KEY" > "$AUTH_KEYS"
-chown "$USERNAME": "$AUTH_KEYS"
+chown "$USER": "$AUTH_KEYS"
 chmod 600 "$AUTH_KEYS"
-chown "$USERNAME": "$USER_HOME"
+chown "$USER": "$USER_HOME"
 chmod 700 "$USER_HOME"
 # Mostrar la llave como salida
 echo "$KEY"
