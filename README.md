@@ -28,3 +28,6 @@ Add the next lines to the SSHD configuration:
 |--------------------------------------------------
 |AuthorizedKeysCommand /path/to/ad_validation.sh
 |AuthorizedKeysCommandUser root
+|PasswordAuthentication no
+|PubkeyAuthentication yes
+|--------------------------------------------------
